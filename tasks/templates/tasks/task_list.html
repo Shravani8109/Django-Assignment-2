@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>List Tasks</h1>
+    <ul>
+        {% for task in tasks %}
+        <li><b>Title:</b> {{ task.title }}</li><br>
+        <li><b>Description:</b> {{ task.description }}</li><br>
+        <li><b>Completed:</b> {{ task.is_completed }}</li><br>
+        <li><b>Status:</b>
+            {% if task.is_completed %}
+            <span style="color:green;">Completed</span>
+            {% else %}
+            <span style="color:red;">Pending</span>
+            {% endif %}
+        </li><br>
+
+        <a href="{% url 'update_task' task.pk %}">Update</a> |
+        <a href="{% url 'delete_task' task.pk %}">Delete</a>
+        <hr>
+        {% empty %}
+        <li>No tasks yet.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>
